@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snapshot - Take Control of Your Energy Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="https://images.squarespace-cdn.com/content/6087714b06d1991ac79e63c7/38666ce2-a0f9-4bcb-a352-98044e680157/LANDVOLT.png?format=100w&content-type=image%2Fpng">
+    <script src="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header with Navigation -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="back-button" id="back-btn" disabled>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <div class="logo">
+                        <div class="logo-text">Snapshot: <span class="tagline-inline">Take control of your energy future</span></div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="start-over-btn" id="start-over-btn">Start Over</button>
+                    <div class="step-indicator" id="step-indicator">1/8</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar">
+                <div class="progress-bar-fill" id="progress-fill" style="width: 12.5%"></div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="question-container" id="question-container">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+        </main>
+
+        <!-- Footer Navigation -->
+        <footer class="footer-nav">
+            <div class="footer-content" id="footer-buttons">
+                <button class="nav-button next" id="next-btn" disabled>Next</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Info Popup Modal -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup-card">
+            <div class="popup-header">
+                <h3 class="popup-title" id="popup-title">Title</h3>
+                <button class="popup-close" id="popup-close">&times;</button>
+            </div>
+            <div class="popup-content" id="popup-content">
+                Content goes here
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Analyzing your property...</div>
+        <div class="loading-subtext">Querying infrastructure and environmental databases</div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Notification</div>
+
+    <!-- Application Script -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>

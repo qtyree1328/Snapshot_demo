@@ -1200,10 +1200,6 @@ function updateNavigation() {
   // Footer buttons
   let buttonsHtml = '';
 
-  if (question.skippable) {
-    buttonsHtml += '<button class="nav-button skip" id="skip-btn">Skip this step</button>';
-  }
-
   // Show Submit button on final step (partner_selection or email)
   if (state.currentStep === STEPS.EMAIL || question.type === 'partner_selection') {
     buttonsHtml += '<button class="nav-button submit" id="next-btn">Submit</button>';
@@ -1215,11 +1211,6 @@ function updateNavigation() {
 
   // Attach navigation handlers
   document.getElementById('next-btn').addEventListener('click', goNext);
-
-  const skipBtn = document.getElementById('skip-btn');
-  if (skipBtn) {
-    skipBtn.addEventListener('click', goNext);
-  }
 
   backBtn.addEventListener('click', goBack);
 }

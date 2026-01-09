@@ -2,6 +2,8 @@
 // Defines all steps, questions, and conditional logic
 
 export const STEPS = {
+  PURPOSE: 'purpose',
+  REALTOR: 'realtor',
   OWNERSHIP: 'ownership',
   INTERESTS: 'interests',
   LOCATION: 'location',
@@ -14,6 +16,8 @@ export const STEPS = {
 };
 
 export const STEP_ORDER = [
+  STEPS.PURPOSE,
+  STEPS.REALTOR,
   STEPS.OWNERSHIP,
   STEPS.INTERESTS,
   STEPS.LOCATION,
@@ -27,6 +31,57 @@ export const STEP_ORDER = [
 
 // Question definitions for each step
 export const QUESTIONS = {
+  [STEPS.PURPOSE]: {
+    id: 'purpose',
+    title: 'What brings you here today?',
+    subtitle: 'Select all that apply - you can explore multiple options.',
+    type: 'checkbox',
+    required: true,
+    options: [
+      {
+        value: 'sell_land',
+        label: 'Valuate my property',
+        description: 'Discover my property\'s full potential value using geospatial technology and comprehensive market research'
+      },
+      {
+        value: 'invest_infrastructure',
+        label: 'Invest in infrastructure',
+        description: 'Explore opportunities in energy projects, data centers, battery storage, or utility-scale development'
+      },
+      {
+        value: 'upgrade_building',
+        label: 'Upgrade my building & systems',
+        description: 'Reduce costs through solar, HVAC upgrades, LED retrofits, energy procurement, and sustainable appliance improvements'
+      }
+    ]
+  },
+
+  [STEPS.REALTOR]: {
+    id: 'realtor',
+    title: 'Are you actively working with a realtor?',
+    subtitle: 'This helps us provide the most relevant recommendations.',
+    type: 'radio',
+    required: true,
+    conditional: 'showRealtorQuestion',
+    options: [
+      {
+        value: 'yes_have_realtor',
+        label: 'Yes, I have a realtor',
+        description: 'I\'m currently working with a real estate agent'
+      },
+      {
+        value: 'actively_trying',
+        label: 'Actively looking for one',
+        description: 'I\'m searching for the right realtor to work with'
+      },
+      {
+        value: 'not_yet',
+        label: 'Not yet, but interested',
+        description: 'I\'d like to learn about my options first'
+      }
+    ]
+  },
+
   [STEPS.OWNERSHIP]: {
     id: 'ownership',
     title: 'What type of property do you own?',
@@ -53,6 +108,7 @@ export const QUESTIONS = {
     subtitle: 'Select all that apply. We\'ll match you with partners who can help.',
     type: 'checkbox',
     required: true,
+    conditional: 'showInterestsQuestion',
     options: [
       {
         value: 'home_energy',
@@ -510,6 +566,32 @@ export const QUESTIONS = {
 };
 
 /**
+ * Check if realtor question should be shown
+ * Only show if user selected 'sell_land' as a purpose
+ * @param {object} userData - User data
+ * @returns {boolean}
+ */
+export function showRealtorQuestion(userData) {
+  const purposes = userData?.purpose || [];
+  return purposes.includes('sell_land');
+}
+
+/**
+ * Check if interests question should be shown
+ * Only show if user selected infrastructure investment or building upgrades
+ * Skip if they only want property valuation
+ * @param {object} userData - User data
+ * @returns {boolean}
+ */
+export function showInterestsQuestion(userData) {
+  const purposes = userData?.purpose || [];
+  // Show if they selected anything other than just valuation
+  const hasInfrastructure = purposes.includes('invest_infrastructure');
+  const hasUpgrades = purposes.includes('upgrade_building');
+  return hasInfrastructure || hasUpgrades;
+}
+
+/**
  * Check if interest confirmation step should be shown
  * Only show when there are multiple options to choose from
  * @param {object} userData - User data
@@ -550,6 +632,14 @@ export function getVisibleSteps(userData, showIdealQuestions) {
 
     if (question.conditional === 'showInterestConfirm') {
       return showInterestConfirm(userData);
+    }
+
+    if (question.conditional === 'showRealtorQuestion') {
+      return showRealtorQuestion(userData);
+    }
+
+    if (question.conditional === 'showInterestsQuestion') {
+      return showInterestsQuestion(userData);
     }
 
     return true;

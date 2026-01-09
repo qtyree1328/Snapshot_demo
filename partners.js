@@ -2,6 +2,13 @@
 import { checkIdealEligibility } from './deregulated-states.js';
 
 export const PARTNERS = {
+  landvolt: {
+    name: 'Landvolt',
+    description: 'Specialized real estate experts who provide comprehensive property valuations using energy infrastructure analysis and geospatial technology. Understand your property\'s true worth with data-driven insights.',
+    services: ['Property Valuation', 'Energy Infrastructure Assessment', 'Market Analysis', 'Strategic Advisory'],
+    color: '#ef4444',
+    selectionText: 'I want expert property valuation and strategic insights'
+  },
   ideal: {
     name: 'Ideal Energy',
     description: 'Energy procurement specialists helping you auction your electricity and gas contracts to get the best rates in deregulated markets.',
@@ -48,7 +55,16 @@ export const THRESHOLDS = {
  */
 export function determinePathways(userData) {
   const pathways = [];
-  const { interests, confirmedInterests, location, bills, analysisResults } = userData;
+  const { purpose, interests, confirmedInterests, location, bills, analysisResults } = userData;
+
+  // Check Landvolt pathway (property valuation interest)
+  const interestedInValuation = purpose?.includes('sell_land');
+  if (interestedInValuation) {
+    pathways.push('landvolt');
+  }
+
+  // Check for building upgrade interest from PURPOSE
+  const interestedInUpgrades = purpose?.includes('upgrade_building');
 
   // Use confirmed interests if available, otherwise fall back to initial interests
   const activeInterests = confirmedInterests?.length > 0 ? confirmedInterests : interests;
@@ -56,13 +72,14 @@ export function determinePathways(userData) {
   // Check for building home energy interest
   const interestedInEnergy = activeInterests?.includes('home_energy') ||
                              activeInterests?.includes('unsure') ||
-                             interests?.includes('unsure');
+                             interests?.includes('unsure') ||
+                             interestedInUpgrades;
 
   // Check for improving home systems interest
-  const interestedInSystems = activeInterests?.includes('home_systems');
+  const interestedInSystems = activeInterests?.includes('home_systems') || interestedInUpgrades;
 
   // Check Ideal Energy pathway (deregulated state + energy interest + sufficient bills)
-  if (interestedInEnergy && location?.state) {
+  if ((interestedInEnergy || interestedInUpgrades) && location?.state) {
     const idealEligibility = checkIdealEligibility(location.state);
     const combinedBill = (bills?.electricity || 0) + (bills?.gas || 0);
 
@@ -74,7 +91,7 @@ export function determinePathways(userData) {
   // Check Chipmunk Solar pathway
   // Suggest if interested in energy AND has good solar potential
   // (regardless of deregulation status - solar is always an option)
-  if (interestedInEnergy) {
+  if (interestedInEnergy || interestedInUpgrades) {
     const goodSolarScore = analysisResults?.solarGHI >= THRESHOLDS.minSolarGHI;
     if (goodSolarScore) {
       pathways.push('chipmunk_solar');
@@ -82,12 +99,12 @@ export function determinePathways(userData) {
   }
 
   // Check Redaptive pathway (improving home systems)
-  if (interestedInSystems) {
+  if (interestedInSystems || interestedInUpgrades) {
     pathways.push('redaptive');
   }
 
   // Check Infrastructure Development pathway
-  const interestedInInfra = interests?.includes('infrastructure');
+  const interestedInInfra = purpose?.includes('invest_infrastructure') || interests?.includes('infrastructure');
   if (interestedInInfra) {
     pathways.push('infrastructure');
   }
@@ -130,6 +147,16 @@ export function getPartnerRecommendations(pathways, userData) {
       const partner = { ...PARTNERS[pathway], key: pathway };
 
       // Add qualification notes
+      if (pathway === 'landvolt') {
+        if (userData.realtor === 'not_yet' || userData.realtor === 'actively_trying') {
+          partner.note = 'Comprehensive property valuation using geospatial technology and energy infrastructure analysis';
+        } else if (userData.realtor === 'yes_have_realtor') {
+          partner.note = 'Get a data-driven valuation to understand your property\'s full potential value';
+        } else {
+          partner.note = 'Expert property valuation with energy infrastructure insights';
+        }
+      }
+
       if (pathway === 'chipmunk_solar' && userData.analysisResults?.solarGHI) {
         partner.note = `Your location has ${getSolarRating(userData.analysisResults.solarGHI)} solar potential (GHI: ${userData.analysisResults.solarGHI.toFixed(1)} kWh/m2/day)`;
       }

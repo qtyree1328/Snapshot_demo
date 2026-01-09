@@ -202,7 +202,7 @@ body {
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary-orange), var(--primary-navy));
+  background: var(--primary-orange);
   border-radius: var(--radius-full);
   transition: width var(--transition-normal);
 }
@@ -1439,4 +1439,226 @@ body {
   background: var(--bg-gray);
   border-radius: var(--radius-full);
   color: var(--text-secondary);
+}
+
+/* Landing Page */
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  background: var(--bg-light);
+}
+
+.landing-container {
+  max-width: 1100px;
+  width: 100%;
+}
+
+.landing-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.landing-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.landing-tagline {
+  font-size: 20px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.landing-content {
+  background: var(--bg-white);
+  border-radius: var(--radius-xl);
+  padding: 56px 48px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-light);
+}
+
+.landing-intro {
+  text-align: center;
+  margin-bottom: 48px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.landing-hero-text {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--primary-orange);
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.landing-description {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.value-props {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.value-prop {
+  padding: 32px 28px;
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.value-prop:hover {
+  border-color: var(--primary-orange);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.value-prop-number {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-orange);
+  margin-bottom: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+.value-prop h3 {
+  font-size: 19px;
+  color: var(--primary-navy);
+  margin-bottom: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.value-prop p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.landing-cta {
+  text-align: center;
+  padding-top: 40px;
+  border-top: 1px solid var(--border-light);
+}
+
+.get-started-btn {
+  background: var(--primary-orange);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 18px 48px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
+}
+
+.get-started-btn:hover {
+  background: var(--primary-orange-hover);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  transform: translateY(-1px);
+}
+
+.get-started-btn:active {
+  transform: translateY(0);
+}
+
+.landing-note {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 16px;
+  font-weight: 400;
+}
+
+/* Download Button */
+.download-btn {
+  background: var(--primary-navy);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.download-btn:hover {
+  background: var(--primary-navy-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive Landing Page */
+@media (max-width: 768px) {
+  .landing-page {
+    padding: 24px 16px;
+  }
+
+  .landing-header {
+    margin-bottom: 40px;
+  }
+
+  .landing-title {
+    font-size: 36px;
+  }
+
+  .landing-tagline {
+    font-size: 18px;
+  }
+
+  .landing-content {
+    padding: 40px 28px;
+  }
+
+  .landing-intro {
+    margin-bottom: 40px;
+  }
+
+  .landing-hero-text {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .landing-description {
+    font-size: 16px;
+  }
+
+  .value-props {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .value-prop {
+    padding: 28px 24px;
+  }
+
+  .get-started-btn {
+    width: 100%;
+    font-size: 17px;
+    padding: 16px 40px;
+  }
 }

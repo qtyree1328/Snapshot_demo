@@ -14,8 +14,10 @@ SnapshotSDK.init({ debug: false });
 // ============================================
 class AppState {
   constructor() {
-    this.currentStep = STEPS.OWNERSHIP;
+    this.currentStep = STEPS.PURPOSE;
     this.data = {
+      purpose: [],
+      realtor: null,
       ownershipType: null,
       interests: [],
       location: {
@@ -82,7 +84,7 @@ class AppState {
       if (saved) {
         const parsed = JSON.parse(saved);
         this.data = { ...this.data, ...parsed.data };
-        this.currentStep = parsed.currentStep || STEPS.OWNERSHIP;
+        this.currentStep = parsed.currentStep || STEPS.PURPOSE;
         this.deregulationStatus = parsed.deregulationStatus || null;
       }
     } catch (e) {
@@ -1701,16 +1703,77 @@ function showSuccessScreen() {
       </div>
     ` : ''}
 
-    <div style="text-align: center; margin-top: 40px;">
+    <div style="text-align: center; margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <button class="download-btn" id="download-report-btn">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+        </svg>
+        Download Report
+      </button>
       <button class="nav-button next" onclick="location.reload()" style="width: auto; padding: 16px 32px;">
         Start New Analysis
       </button>
     </div>
   `;
 
+  // Attach download handler
+  document.getElementById('download-report-btn').addEventListener('click', downloadUserReport);
+
   // Hide footer
   document.querySelector('.footer-nav').style.display = 'none';
   document.getElementById('back-btn').disabled = true;
+}
+
+function downloadUserReport() {
+  // Aggregate all user data
+  const reportData = {
+    submittedAt: new Date().toISOString(),
+
+    // Purpose and initial responses
+    purpose: state.data.purpose,
+    realtor: state.data.realtor,
+    ownershipType: state.data.ownershipType,
+    interests: state.data.interests,
+    confirmedInterests: state.data.confirmedInterests,
+
+    // Location data
+    location: state.data.location,
+
+    // Property details
+    propertyDetails: state.data.propertyDetails,
+
+    // Energy bills
+    bills: state.data.bills,
+
+    // Analysis results
+    analysisResults: state.data.analysisResults,
+    pathways: state.data.pathways,
+
+    // Selected partners
+    selectedPartners: state.data.selectedPartners,
+
+    // Contact
+    email: state.data.email,
+
+    // Documents (file names only for privacy)
+    documents: state.data.documents
+  };
+
+  // Convert to JSON and download
+  const dataStr = JSON.stringify(reportData, null, 2);
+  const dataBlob = new Blob([dataStr], { type: 'application/json' });
+
+  const url = URL.createObjectURL(dataBlob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `snapshot-report-${Date.now()}.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+
+  showToast('Report downloaded successfully!', 'success');
 }
 
 function generateId() {
@@ -1766,8 +1829,46 @@ function init() {
   // Start over button
   document.getElementById('start-over-btn').addEventListener('click', startOver);
 
-  // Render initial step
-  renderStep();
+  // Check if we should show landing page or app
+  const hasStarted = localStorage.getItem('snapshot_questionnaire');
+
+  if (!hasStarted) {
+    // Show landing page
+    showLandingPage();
+  } else {
+    // Show app directly
+    hideLandingPage();
+    renderStep();
+  }
+}
+
+function showLandingPage() {
+  const landingPage = document.getElementById('landing-page');
+  const appContainer = document.getElementById('app-container');
+
+  if (landingPage && appContainer) {
+    landingPage.style.display = 'flex';
+    appContainer.style.display = 'none';
+
+    // Get started button handler
+    const getStartedBtn = document.getElementById('get-started-btn');
+    if (getStartedBtn) {
+      getStartedBtn.addEventListener('click', () => {
+        hideLandingPage();
+        renderStep();
+      });
+    }
+  }
+}
+
+function hideLandingPage() {
+  const landingPage = document.getElementById('landing-page');
+  const appContainer = document.getElementById('app-container');
+
+  if (landingPage && appContainer) {
+    landingPage.style.display = 'none';
+    appContainer.style.display = 'flex';
+  }
 }
 
 // Start the application

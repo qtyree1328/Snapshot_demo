@@ -1847,15 +1847,157 @@ function showLandingPage() {
   const appContainer = document.getElementById('app-container');
 
   if (landingPage && appContainer) {
-    landingPage.style.display = 'flex';
+    landingPage.style.display = 'block';
     appContainer.style.display = 'none';
+
+    // Tab switching functionality
+    const navTabs = document.querySelectorAll('.nav-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    function switchTab(tabName) {
+      // Remove active class from all tabs and contents
+      navTabs.forEach(t => t.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+
+      // Add active class to selected tab and corresponding content
+      const selectedTab = document.querySelector(`.nav-tab[data-tab="${tabName}"]`);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+      }
+      const selectedContent = document.getElementById(`${tabName}-tab`);
+      if (selectedContent) {
+        selectedContent.classList.add('active');
+      }
+
+      // Show/hide fixed background based on active tab
+      const fixedBg = document.querySelector('.fixed-background');
+      if (fixedBg) {
+        if (tabName === 'home') {
+          fixedBg.style.opacity = '1';
+          fixedBg.style.pointerEvents = 'auto';
+        } else {
+          fixedBg.style.opacity = '0';
+          fixedBg.style.pointerEvents = 'none';
+        }
+      }
+
+      // Scroll to top when switching tabs
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    navTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabName = tab.getAttribute('data-tab');
+        switchTab(tabName);
+      });
+    });
+
+    // Make logo clickable
+    const logo = document.querySelector('.landing-logo');
+    if (logo) {
+      logo.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchTab('home');
+      });
+    }
+
+    // Footer links functionality
+    const footerLinks = document.querySelectorAll('.footer-link');
+    footerLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tabName = link.getAttribute('data-tab');
+        switchTab(tabName);
+      });
+    });
 
     // Get started button handler
     const getStartedBtn = document.getElementById('get-started-btn');
+    const getStartedBtnSticky = document.getElementById('get-started-btn-sticky');
+
     if (getStartedBtn) {
       getStartedBtn.addEventListener('click', () => {
         hideLandingPage();
         renderStep();
+      });
+    }
+
+    if (getStartedBtnSticky) {
+      getStartedBtnSticky.addEventListener('click', () => {
+        hideLandingPage();
+        renderStep();
+      });
+    }
+
+    // Scroll handler for sticky button
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    function handleScroll() {
+      const scrollPosition = window.scrollY;
+      const stickyBtn = document.getElementById('get-started-btn-sticky');
+      const heroBtn = document.getElementById('get-started-btn');
+
+      if (!stickyBtn || !heroBtn) return;
+
+      // Calculate if hero button is out of view
+      const heroBtnRect = heroBtn.getBoundingClientRect();
+      const heroButtonBottom = heroBtnRect.bottom;
+
+      // Show sticky button only when hero button is completely scrolled past the nav (72px)
+      // Add some buffer (50px) to avoid overlap
+      if (heroButtonBottom < 0) {
+        stickyBtn.classList.add('visible');
+      } else {
+        stickyBtn.classList.remove('visible');
+      }
+    }
+
+    // Partner application form handler
+    const partnerForm = document.getElementById('partner-application-form');
+    if (partnerForm) {
+      partnerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = {
+          companyName: document.getElementById('company-name').value,
+          contactName: document.getElementById('contact-name').value,
+          email: document.getElementById('contact-email').value,
+          phone: document.getElementById('contact-phone').value,
+          serviceCategory: document.getElementById('service-category').value,
+          description: document.getElementById('company-description').value,
+          coverageArea: document.getElementById('coverage-area').value,
+          submittedAt: new Date().toISOString()
+        };
+
+        // Log the application data (in production, this would be sent to a server)
+        console.log('Partner Application Submitted:', formData);
+
+        // Show success message
+        showToast('Application submitted successfully! We\'ll be in touch soon.', 'success');
+
+        // Reset form
+        partnerForm.reset();
+
+        // Optionally download the application as JSON
+        const dataStr = JSON.stringify(formData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `partner-application-${Date.now()}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
       });
     }
   }

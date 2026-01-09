@@ -14,41 +14,455 @@
 <body>
     <!-- Landing Page -->
     <div class="landing-page" id="landing-page">
-        <div class="landing-container">
-            <div class="landing-header">
-                <h1 class="landing-title">Snapshot</h1>
-                <p class="landing-tagline">Comprehensive Property Analysis for Energy & Infrastructure</p>
+        <!-- Navigation -->
+        <nav class="landing-nav" id="landing-nav">
+            <div class="landing-nav-container">
+                <a href="#" class="landing-logo" data-tab="home">Snapshot</a>
+                <div class="landing-nav-tabs">
+                    <button class="nav-tab active" data-tab="partners">Our Partners</button>
+                    <button class="nav-tab" data-tab="about">About</button>
+                    <button class="get-started-btn-sticky" id="get-started-btn-sticky">Get Started</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Home Tab Content -->
+        <div class="tab-content active" id="home-tab">
+            <!-- Fixed Background Image -->
+            <div class="fixed-background"></div>
+
+            <!-- Hero Section with Overlay -->
+            <div class="hero-section">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">Take control of your energy future</h1>
+                    <p class="hero-subtitle">Whether you're looking to invest in sustainable energy infrastructure or understand your property's true value, Snapshot uses advanced geospatial technology to provide comprehensive property analysis.</p>
+
+                    <div class="value-props">
+                        <div class="value-prop">
+                            <div class="value-prop-number">01</div>
+                            <h3>Property Valuation</h3>
+                            <p>Using geospatial technology and comprehensive research, discover your property's full potential value based on energy infrastructure opportunities, environmental factors, and market conditions.</p>
+                        </div>
+
+                        <div class="value-prop">
+                            <div class="value-prop-number">02</div>
+                            <h3>Energy Infrastructure Investment</h3>
+                            <p>Explore opportunities in solar, data centers, battery storage, and utility-scale projects. Maximize your land's income potential through strategic energy development.</p>
+                        </div>
+
+                        <div class="value-prop">
+                            <div class="value-prop-number">03</div>
+                            <h3>Building & Appliance Upgrades</h3>
+                            <p>Reduce costs and energy consumption with solar installations, HVAC upgrades, LED retrofits, energy procurement strategies, and smart building systems.</p>
+                        </div>
+                    </div>
+
+                    <div class="hero-cta">
+                        <button class="get-started-btn-hero" id="get-started-btn">Get Started</button>
+                        <p class="hero-tagline">Connect to specialized partners at no costs</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="landing-content">
-                <div class="landing-intro">
-                    <p class="landing-hero-text">Take control of your energy future</p>
-                    <p class="landing-description">Whether you're looking to invest in sustainable energy infrastructure or understand your property's true value, Snapshot uses advanced geospatial technology to provide comprehensive property analysis and connect you with specialized partners.</p>
-                </div>
-
-                <div class="value-props">
-                    <div class="value-prop">
-                        <div class="value-prop-number">01</div>
-                        <h3>Property Valuation</h3>
-                        <p>Using geospatial technology and comprehensive research, discover your property's full potential value based on energy infrastructure opportunities, environmental factors, and market conditions. Take control with data-driven insights.</p>
+            <!-- Detailed Content Sections -->
+            <div class="landing-container">
+                <!-- Property Valuation Section -->
+                <div class="content-section">
+                    <div class="content-section-header">
+                        <span class="content-section-number">01</span>
+                        <h2 class="content-section-title">Property Valuation</h2>
                     </div>
-
-                    <div class="value-prop">
-                        <div class="value-prop-number">02</div>
-                        <h3>Energy Infrastructure Investment</h3>
-                        <p>Explore opportunities in solar, data centers, battery storage, and utility-scale projects. Maximize your land's income potential through strategic energy development.</p>
-                    </div>
-
-                    <div class="value-prop">
-                        <div class="value-prop-number">03</div>
-                        <h3>Building & Appliance Upgrades</h3>
-                        <p>Reduce costs and energy consumption with solar installations, HVAC upgrades, LED retrofits, energy procurement strategies, and smart building systems. Improve sustainability while cutting expenses.</p>
+                    <div class="content-section-text">
+                        <h3>Understand Your Property's True Worth</h3>
+                        <p>Traditional property valuations often miss critical factors that can significantly impact your land's value. Our geospatial analysis goes beyond standard assessments to uncover hidden opportunities.</p>
+                        <ul class="content-section-list">
+                            <li><strong>Energy Infrastructure Proximity:</strong> Distance to power lines, substations, and transmission corridors can dramatically increase property value for energy development</li>
+                            <li><strong>Solar & Renewable Potential:</strong> Comprehensive analysis of solar irradiance, wind patterns, and renewable energy viability</li>
+                            <li><strong>Development Suitability:</strong> Assessment of zoning, environmental constraints, and infrastructure access</li>
+                            <li><strong>Market Intelligence:</strong> Real-time data on energy markets, land transactions, and investment trends</li>
+                        </ul>
+                        <p class="content-highlight">Property valuations that account for energy infrastructure can reveal 20-40% more value than traditional assessments.</p>
                     </div>
                 </div>
 
-                <div class="landing-cta">
-                    <button class="get-started-btn" id="get-started-btn">Get Started</button>
-                    <p class="landing-note">Complete our questionnaire to receive your personalized property analysis</p>
+                <!-- Energy Infrastructure Section -->
+                <div class="content-section">
+                    <div class="content-section-header">
+                        <span class="content-section-number">02</span>
+                        <h2 class="content-section-title">Energy Infrastructure Investment</h2>
+                    </div>
+                    <div class="content-section-text">
+                        <h3>Maximize Your Land's Income Potential</h3>
+                        <p>Energy infrastructure development represents one of the fastest-growing sectors in real estate. Property owners can generate substantial long-term income through strategic partnerships.</p>
+                        <ul class="content-section-list">
+                            <li><strong>Utility-Scale Solar:</strong> Lease your land for large solar arrays, generating 20-30 years of stable income with minimal disruption</li>
+                            <li><strong>Data Center Development:</strong> High-value developments with proximity to power infrastructure and fiber networks</li>
+                            <li><strong>Battery Storage:</strong> Critical grid infrastructure that provides reliable lease income and supports renewable energy</li>
+                            <li><strong>Wind Energy:</strong> Long-term lease agreements with wind farm developers for properties with suitable wind resources</li>
+                        </ul>
+                        <p class="content-highlight">Land leases for utility-scale solar typically generate $500-$1,500 per acre annually for 25+ years.</p>
+                    </div>
+                </div>
+
+                <!-- Building Upgrades Section -->
+                <div class="content-section">
+                    <div class="content-section-header">
+                        <span class="content-section-number">03</span>
+                        <h2 class="content-section-title">Building & System Upgrades</h2>
+                    </div>
+                    <div class="content-section-text">
+                        <h3>Reduce Costs & Environmental Impact</h3>
+                        <p>Building energy upgrades deliver immediate cost savings while increasing property value and reducing your environmental footprint. Our partners provide turnkey solutions with zero upfront investment options.</p>
+                        <ul class="content-section-list">
+                            <li><strong>Solar Installation:</strong> Residential and commercial solar systems that can eliminate 70-100% of electricity costs</li>
+                            <li><strong>HVAC Optimization:</strong> Smart building systems that reduce heating and cooling costs by 30-50%</li>
+                            <li><strong>LED Retrofits:</strong> Lighting upgrades that pay for themselves in 1-3 years while improving workspace quality</li>
+                            <li><strong>Energy Procurement:</strong> Competitive bidding for electricity and gas contracts in deregulated markets</li>
+                        </ul>
+                        <p class="content-highlight">Commercial buildings can reduce energy costs by 40-60% through comprehensive efficiency upgrades.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="landing-footer">
+                <div class="footer-content-section">
+                    <div class="footer-column">
+                        <h4>Snapshot</h4>
+                        <p>Empowering property owners with data-driven insights and expert connections in energy infrastructure and sustainable development.</p>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" class="footer-link" data-tab="home">Home</a></li>
+                            <li><a href="#" class="footer-link" data-tab="partners">Our Partners</a></li>
+                            <li><a href="#" class="footer-link" data-tab="about">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <p class="footer-contact">
+                            Email: <a href="mailto:info@snapshot.energy">info@snapshot.energy</a><br>
+                            Phone: <a href="tel:+15555551234">(555) 555-1234</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Snapshot. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Partners Tab Content -->
+        <div class="tab-content" id="partners-tab">
+            <!-- Partners Hero Section -->
+            <div class="page-hero">
+                <div class="page-hero-overlay"></div>
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Our Partners</h1>
+                    <p class="page-hero-subtitle">We connect you with industry-leading specialists in energy, real estate, and infrastructure development.</p>
+                </div>
+            </div>
+
+            <div class="landing-container">
+                <div class="partners-header" style="margin-top: 0;">
+                    <h2 class="section-title">Trusted Specialists</h2>
+                    <p class="section-subtitle">Every partner is carefully vetted to ensure they deliver exceptional service and expertise.</p>
+                </div>
+
+                <div class="partners-showcase">
+                    <div class="partner-showcase-card">
+                        <div class="partner-showcase-header" style="border-left: 4px solid #ef4444;">
+                            <h3>Landvolt</h3>
+                            <span class="partner-category">Property Valuation</span>
+                        </div>
+                        <p class="partner-showcase-description">Specialized real estate experts who provide comprehensive property valuations using energy infrastructure analysis and geospatial technology. Understand your property's true worth with data-driven insights.</p>
+                        <div class="partner-showcase-services">
+                            <span class="service-badge">Property Valuation</span>
+                            <span class="service-badge">Energy Infrastructure Assessment</span>
+                            <span class="service-badge">Market Analysis</span>
+                            <span class="service-badge">Strategic Advisory</span>
+                        </div>
+                    </div>
+
+                    <div class="partner-showcase-card">
+                        <div class="partner-showcase-header" style="border-left: 4px solid #2563eb;">
+                            <h3>Ideal Energy</h3>
+                            <span class="partner-category">Energy Procurement</span>
+                        </div>
+                        <p class="partner-showcase-description">Energy procurement specialists helping you auction your electricity and gas contracts to get the best rates in deregulated markets.</p>
+                        <div class="partner-showcase-services">
+                            <span class="service-badge">Electricity Bill Auction</span>
+                            <span class="service-badge">Natural Gas Bill Auction</span>
+                            <span class="service-badge">Energy Contract Optimization</span>
+                        </div>
+                    </div>
+
+                    <div class="partner-showcase-card">
+                        <div class="partner-showcase-header" style="border-left: 4px solid #f59e0b;">
+                            <h3>Chipmunk Solar</h3>
+                            <span class="partner-category">Solar Installation</span>
+                        </div>
+                        <p class="partner-showcase-description">Expert solar installation for residential and commercial properties. Maximize your solar potential with custom-designed systems.</p>
+                        <div class="partner-showcase-services">
+                            <span class="service-badge">Rooftop Solar Installation</span>
+                            <span class="service-badge">Ground-Mount Solar Systems</span>
+                            <span class="service-badge">Battery Storage</span>
+                            <span class="service-badge">Solar + EV Charging</span>
+                        </div>
+                    </div>
+
+                    <div class="partner-showcase-card">
+                        <div class="partner-showcase-header" style="border-left: 4px solid #10b981;">
+                            <h3>Redaptive Inc</h3>
+                            <span class="partner-category">Building Efficiency</span>
+                        </div>
+                        <p class="partner-showcase-description">Leading provider of efficiency-as-a-service for commercial and industrial facilities. Reduce energy consumption through building upgrades.</p>
+                        <div class="partner-showcase-services">
+                            <span class="service-badge">HVAC Optimization</span>
+                            <span class="service-badge">LED Retrofit</span>
+                            <span class="service-badge">Building Automation</span>
+                            <span class="service-badge">Energy Efficiency Audits</span>
+                        </div>
+                    </div>
+
+                    <div class="partner-showcase-card">
+                        <div class="partner-showcase-header" style="border-left: 4px solid #8b5cf6;">
+                            <h3>Infrastructure Development Partners</h3>
+                            <span class="partner-category">Large-Scale Development</span>
+                        </div>
+                        <p class="partner-showcase-description">Connect your land to utility-scale energy projects including data centers and solar farms.</p>
+                        <div class="partner-showcase-services">
+                            <span class="service-badge">Data Center Site Development</span>
+                            <span class="service-badge">Utility-Scale Solar</span>
+                            <span class="service-badge">Energy Storage Projects</span>
+                            <span class="service-badge">Grid Infrastructure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Become a Partner Section -->
+                <div class="become-partner-section">
+                    <div class="become-partner-content">
+                        <h2 class="section-title">Become a Partner</h2>
+                        <p class="section-subtitle">Join our network of specialized service providers and connect with property owners seeking expert guidance in energy infrastructure and property development.</p>
+
+                        <div class="partner-benefits">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">01</div>
+                                <div class="benefit-text">
+                                    <h4>Qualified Leads</h4>
+                                    <p>Access pre-screened property owners actively seeking your services</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">02</div>
+                                <div class="benefit-text">
+                                    <h4>Targeted Matching</h4>
+                                    <p>Our intelligent system matches you with properties that fit your expertise</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">03</div>
+                                <div class="benefit-text">
+                                    <h4>Data-Driven Insights</h4>
+                                    <p>Receive comprehensive property analysis to streamline your workflow</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="partner-application-form" id="partner-application-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="company-name">Company Name</label>
+                                    <input type="text" id="company-name" name="company-name" required placeholder="Your company name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-name">Contact Name</label>
+                                    <input type="text" id="contact-name" name="contact-name" required placeholder="Your full name">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contact-email">Email</label>
+                                    <input type="email" id="contact-email" name="contact-email" required placeholder="your.email@company.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-phone">Phone</label>
+                                    <input type="tel" id="contact-phone" name="contact-phone" required placeholder="(555) 123-4567">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="service-category">Service Category</label>
+                                <select id="service-category" name="service-category" required>
+                                    <option value="">Select your primary service</option>
+                                    <option value="property-valuation">Property Valuation</option>
+                                    <option value="energy-procurement">Energy Procurement</option>
+                                    <option value="solar-installation">Solar Installation</option>
+                                    <option value="building-efficiency">Building Efficiency</option>
+                                    <option value="infrastructure">Infrastructure Development</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="company-description">Company Description</label>
+                                <textarea id="company-description" name="company-description" rows="4" required placeholder="Tell us about your company, services, and what makes you unique..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="coverage-area">Geographic Coverage</label>
+                                <input type="text" id="coverage-area" name="coverage-area" required placeholder="e.g., Texas, Southwest US, Nationwide">
+                            </div>
+
+                            <button type="submit" class="submit-partner-btn">Submit Application</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Footer Section -->
+                <div class="landing-footer">
+                    <div class="footer-content-section">
+                        <div class="footer-column">
+                            <h4>Snapshot</h4>
+                            <p>Empowering property owners with data-driven insights and expert connections in energy infrastructure and sustainable development.</p>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Quick Links</h4>
+                            <ul class="footer-links">
+                                <li><a href="#" class="footer-link" data-tab="home">Home</a></li>
+                                <li><a href="#" class="footer-link" data-tab="partners">Our Partners</a></li>
+                                <li><a href="#" class="footer-link" data-tab="about">About</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Contact</h4>
+                            <p class="footer-contact">
+                                Email: <a href="mailto:info@snapshot.energy">info@snapshot.energy</a><br>
+                                Phone: <a href="tel:+15555551234">(555) 555-1234</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2026 Snapshot. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Tab Content -->
+        <div class="tab-content" id="about-tab">
+            <!-- About Hero Section -->
+            <div class="page-hero">
+                <div class="page-hero-overlay"></div>
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">About Snapshot</h1>
+                    <p class="page-hero-subtitle">Empowering property owners with data-driven insights and expert connections</p>
+                </div>
+            </div>
+
+            <div class="landing-container">
+                <div class="about-header" style="margin-top: 0;">
+                    <h2 class="section-title">Our Story</h2>
+                    <p class="section-subtitle">Building the future of property intelligence and energy infrastructure</p>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-section">
+                        <h3>Our Mission</h3>
+                        <p>Snapshot leverages advanced geospatial technology and comprehensive property analysis to connect property owners with specialized partners in energy infrastructure, real estate valuation, and sustainable building improvements. We believe that every property owner deserves access to expert guidance and data-driven insights to make informed decisions about their property's future.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>How It Works</h3>
+                        <div class="how-it-works-grid">
+                            <div class="how-it-works-step">
+                                <div class="step-number">1</div>
+                                <h4>Complete the Questionnaire</h4>
+                                <p>Answer questions about your property, interests, and goals. Our intelligent system gathers the information needed to provide accurate recommendations.</p>
+                            </div>
+                            <div class="how-it-works-step">
+                                <div class="step-number">2</div>
+                                <h4>Geospatial Analysis</h4>
+                                <p>We analyze your property using advanced geospatial technology, assessing solar potential, proximity to infrastructure, environmental factors, and market conditions.</p>
+                            </div>
+                            <div class="how-it-works-step">
+                                <div class="step-number">3</div>
+                                <h4>Partner Matching</h4>
+                                <p>Based on your needs and property characteristics, we recommend specialized partners who can help you achieve your goals.</p>
+                            </div>
+                            <div class="how-it-works-step">
+                                <div class="step-number">4</div>
+                                <h4>Get Connected</h4>
+                                <p>Receive personalized introductions to partners at no cost. They'll reach out with customized proposals and next steps.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Our Technology</h3>
+                        <p>Snapshot utilizes cutting-edge geospatial analysis tools to evaluate properties across multiple dimensions:</p>
+                        <ul class="tech-list">
+                            <li><strong>Solar Potential:</strong> Global Horizontal Irradiance (GHI) analysis to determine solar energy viability</li>
+                            <li><strong>Infrastructure Proximity:</strong> Distance to electrical grids, transmission lines, and substations</li>
+                            <li><strong>Environmental Assessment:</strong> Wetlands, floodplains, protected areas, and regulatory constraints</li>
+                            <li><strong>Market Analysis:</strong> Energy market conditions and deregulation status</li>
+                            <li><strong>Development Suitability:</strong> Property characteristics for various energy and infrastructure projects</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Why Choose Snapshot?</h3>
+                        <div class="why-choose-grid">
+                            <div class="why-choose-item">
+                                <h4>Free Service</h4>
+                                <p>Property owners pay nothing. Our partner network funds the platform.</p>
+                            </div>
+                            <div class="why-choose-item">
+                                <h4>Expert Partners</h4>
+                                <p>We work exclusively with vetted, industry-leading specialists.</p>
+                            </div>
+                            <div class="why-choose-item">
+                                <h4>Data-Driven</h4>
+                                <p>Advanced geospatial technology provides accurate, actionable insights.</p>
+                            </div>
+                            <div class="why-choose-item">
+                                <h4>No Obligation</h4>
+                                <p>Get recommendations and decide which partners to engage with.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Section -->
+                <div class="landing-footer">
+                    <div class="footer-content-section">
+                        <div class="footer-column">
+                            <h4>Snapshot</h4>
+                            <p>Empowering property owners with data-driven insights and expert connections in energy infrastructure and sustainable development.</p>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Quick Links</h4>
+                            <ul class="footer-links">
+                                <li><a href="#" class="footer-link" data-tab="home">Home</a></li>
+                                <li><a href="#" class="footer-link" data-tab="partners">Our Partners</a></li>
+                                <li><a href="#" class="footer-link" data-tab="about">About</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Contact</h4>
+                            <p class="footer-contact">
+                                Email: <a href="mailto:info@snapshot.energy">info@snapshot.energy</a><br>
+                                Phone: <a href="tel:+15555551234">(555) 555-1234</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2026 Snapshot. All rights reserved.</p>
+                    </div>
                 </div>
             </div>
         </div>

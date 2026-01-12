@@ -508,13 +508,14 @@
 
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loading-overlay">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p class="loading-text" id="loading-text">Analyzing your property...</p>
-        </div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text" id="loading-text">Analyzing your property...</div>
+        <div class="loading-subtext">Querying infrastructure and environmental databases</div>
     </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=places,geometry&callback=initGooglePlaces" async defer></script>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Notification</div>
+
     <script type="module" src="app.js"></script>
 </body>
 </html>

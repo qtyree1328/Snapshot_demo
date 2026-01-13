@@ -2,7 +2,7 @@
 // Main application logic with state management and SnapshotSDK integration
 
 import { STEPS, STEP_ORDER, QUESTIONS, getVisibleSteps, getCurrentStepIndex, getTotalSteps } from './questionnaire-config.js';
-import { checkIdealEligibility, getStateAbbreviation } from './deregulated-states.js';
+import { checkIdealEligibility, getStateAbbreviation, STATE_REGULATION_DATA, STATE_NAMES, getDeregulationCategory } from './deregulated-states.js';
 import { shouldShowIdealQuestions, determinePathways, getPartnerRecommendations, PARTNERS, THRESHOLDS } from './partners.js';
 import { SnapshotSDK } from './Reference_files/snapshot-sdk.js';
 
@@ -2000,7 +2000,133 @@ function showLandingPage() {
         URL.revokeObjectURL(url);
       });
     }
+
+    // Initialize Deregulation Map
+    initDeregulationMap();
   }
+}
+
+// Initialize the US Deregulation Map with colors and hover tooltips
+async function initDeregulationMap() {
+  const container = document.getElementById('us-map-container');
+  const tooltip = document.getElementById('state-tooltip');
+
+  if (!container || !tooltip) return;
+
+  // Load the SVG file
+  try {
+    const response = await fetch('assets/us-map-final.svg');
+    const svgText = await response.text();
+    container.innerHTML = svgText;
+  } catch (e) {
+    console.error('Failed to load US map SVG:', e);
+    return;
+  }
+
+  const mapSvg = container.querySelector('svg');
+  if (!mapSvg) return;
+
+  mapSvg.id = 'us-deregulation-map';
+
+  const states = mapSvg.querySelectorAll('.state');
+
+  states.forEach(stateEl => {
+    const stateAbbr = stateEl.getAttribute('data-state');
+    if (!stateAbbr) return;
+
+    // Set the correct CSS class based on deregulation status
+    const category = getDeregulationCategory(stateAbbr);
+
+    // Remove default class and add the correct one
+    stateEl.classList.remove('regulated', 'deregulated', 'electricity-only', 'gas-only', 'partial');
+
+    switch (category) {
+      case 'deregulated':
+        stateEl.classList.add('deregulated');
+        break;
+      case 'electricity':
+        stateEl.classList.add('electricity-only');
+        break;
+      case 'gas':
+        stateEl.classList.add('gas-only');
+        break;
+      case 'partial':
+        stateEl.classList.add('partial');
+        break;
+      default:
+        stateEl.classList.add('regulated');
+    }
+
+    // Add hover event listeners
+    stateEl.addEventListener('mouseenter', (e) => {
+      showStateTooltip(stateAbbr, e, tooltip);
+    });
+
+    stateEl.addEventListener('mousemove', (e) => {
+      positionTooltip(e, tooltip);
+    });
+
+    stateEl.addEventListener('mouseleave', () => {
+      hideTooltip(tooltip);
+    });
+  });
+}
+
+function showStateTooltip(stateAbbr, event, tooltip) {
+  const data = STATE_REGULATION_DATA[stateAbbr];
+  const stateName = STATE_NAMES[stateAbbr];
+
+  if (!data || !stateName) return;
+
+  // Build tooltip HTML
+  const electricityClass = data.electricity === 'Yes' ? 'yes' : (data.electricity === 'Limited' ? 'limited' : 'no');
+  const gasClass = data.gas === 'Yes' ? 'yes' : (data.gas === 'Limited' ? 'limited' : 'no');
+
+  tooltip.innerHTML = `
+    <div class="tooltip-title">${stateName}</div>
+    <div class="tooltip-status">
+      <div class="tooltip-item">
+        <span class="tooltip-label">Electricity:</span>
+        <span class="tooltip-value ${electricityClass}">${data.electricity}</span>
+      </div>
+      <div class="tooltip-item">
+        <span class="tooltip-label">Gas:</span>
+        <span class="tooltip-value ${gasClass}">${data.gas}</span>
+      </div>
+    </div>
+    <div class="tooltip-description">${data.tooltip}</div>
+  `;
+
+  positionTooltip(event, tooltip);
+  tooltip.classList.add('visible');
+}
+
+function positionTooltip(event, tooltip) {
+  const mapWrapper = document.querySelector('.us-map-wrapper');
+  if (!mapWrapper) return;
+
+  const rect = mapWrapper.getBoundingClientRect();
+  const tooltipRect = tooltip.getBoundingClientRect();
+
+  let x = event.clientX - rect.left + 15;
+  let y = event.clientY - rect.top + 15;
+
+  // Prevent tooltip from going off the right edge
+  if (x + tooltipRect.width > rect.width) {
+    x = event.clientX - rect.left - tooltipRect.width - 15;
+  }
+
+  // Prevent tooltip from going off the bottom edge
+  if (y + tooltipRect.height > rect.height) {
+    y = event.clientY - rect.top - tooltipRect.height - 15;
+  }
+
+  tooltip.style.left = `${x}px`;
+  tooltip.style.top = `${y}px`;
+}
+
+function hideTooltip(tooltip) {
+  tooltip.classList.remove('visible');
 }
 
 function hideLandingPage() {

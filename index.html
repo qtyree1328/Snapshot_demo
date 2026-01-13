@@ -118,11 +118,45 @@
                                 <li><strong>Wind Energy:</strong> Long-term lease agreements with wind farm developers for properties with suitable wind resources</li>
                             </ul>
                             <p class="content-highlight-new">Land leases for utility-scale solar typically generate $500-$1,500 per acre annually for 25+ years.</p>
-                            
-                            <!-- Image element -->
-                            <!-- <div class="section-media">
-                                <img src="assets/energy.png" alt="Energy Infrastructure" class="section-image">
-                            </div> -->
+
+                            <!-- US Energy Deregulation Map -->
+                            <div class="deregulation-map-container">
+                                <h3 class="map-title">US Energy Market Deregulation Status</h3>
+                                <p class="map-intro">In deregulated energy markets, consumers have the power to choose their electricity and natural gas providers rather than being locked into a single utility. This competition drives down costs, improves service quality, and gives you access to innovative energy plans—including 100% renewable options, time-of-use pricing, and bundled incentives like smart thermostats or solar credits.</p>
+                                <p class="map-description">Hover over states below to see their electricity and natural gas deregulation status.</p>
+
+                                <div class="us-map-wrapper">
+                                    <!-- SVG map loaded dynamically from external file -->
+                                    <div id="us-map-container"></div>
+
+                                    <!-- State Tooltip -->
+                                    <div class="state-tooltip" id="state-tooltip"></div>
+                                </div>
+
+                                <!-- Map Legend -->
+                                <div class="map-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color deregulated"></span>
+                                        <span class="legend-label">Deregulated (Both)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color electricity-only"></span>
+                                        <span class="legend-label">Electric Only</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color gas-only"></span>
+                                        <span class="legend-label">Gas Only</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color partial"></span>
+                                        <span class="legend-label">Limited/Partial</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color regulated"></span>
+                                        <span class="legend-label">No Energy Choice</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
